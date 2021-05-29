@@ -43,3 +43,53 @@
         return true;
     }
 };
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+//  var totalNQueens = function(n) {
+//     const board = Array.from( { length: n }, () => new Array(n));
+//     let result = 0;
+//     solve(0, board)
+//     return result;
+    
+//     function solve(row, board) {
+//         if (row === n) {
+//             result++;
+//             return;
+//         }
+        
+//         for (let col = 0; col < n; col++) {
+//             if (isValid(board, row, col)) {
+//                 board[row][col] = 'Q';
+//                 solve(row + 1, board);
+//                 board[row][col] = null;
+//             }
+//         }
+//     }
+    
+//     function isValid(board, row, col) {
+//         let curCol = col;
+//         let curRow = 0;
+//         // col
+//         for (; curRow < row; curRow++) {
+//             if (board[curRow][curCol] === 'Q') return false;
+//         }
+        
+//         // top left
+//         curCol = col - 1;
+//         curRow = row - 1;
+//         while (curCol >= 0 && curRow >= 0) {
+//             if (board[curRow--][curCol--] === 'Q') return false;
+//         }
+//         // top right
+//         curCol = col + 1;
+//         curRow = row - 1;
+//         while (curCol < n && curRow >= 0) {
+//             if (board[curRow--][curCol++] === 'Q') return false;
+//         }
+        
+//         return true;
+//     }
+// };
