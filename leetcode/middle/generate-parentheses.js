@@ -23,3 +23,26 @@
         }
     }
 };
+
+// var generateParenthesis = function(n) {
+//     const result = [];
+    
+//     generate('(', 1, 0);
+    
+//     return result;
+    
+//     function generate(parenthesis, open, closed) {
+//         if (closed === n && open === n) {
+//             result.push(parenthesis);
+//             return;
+//         }
+        
+//         if (open < n) {
+//             generate(parenthesis + '(', open + 1, closed);
+//         }
+        
+//         if (closed < open) {
+//             generate(parenthesis + ')', open, closed + 1);
+//         }
+//     }
+// };
