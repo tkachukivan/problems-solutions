@@ -93,6 +93,93 @@
 
 //     return count;
 // }
+// red black bst (balanced)
+var countSmaller = function(nums) {
+    const n = nums.length;
+    const result = new Uint32Array(n);
+    let root = new Node(nums[n - 1]);
+    
+    for (let i = n - 2; i >= 0; i--) {
+        root = add(root, nums[i], i);
+        root.isRed = false;
+    }
+    
+    return result;
+    
+    function add(node, val, index) {
+        if (!node) return new Node(val);
+
+        if (node.val === val) {
+            node.count++;
+            result[index] += size(node.left);
+        } else if (node.val > val) {
+            node.left = add(node.left, val, index)
+        } else {
+            result[index] += (size(node.left) + node.count);
+            node.right = add(node.right, val, index);
+        }
+        
+        if (isRed(node.right) && !isRed(node.left))      node = rotateLeft(node);
+        if (isRed(node.left)  &&  isRed(node.left.left)) node = rotateRight(node);
+        if (isRed(node.left)  &&  isRed(node.right))     flipColors(node);
+        node.size = size(node.left) + size(node.right) + node.count;
+
+        return node;
+    }
+    
+    function isRed(node) {
+        if (!node) return false;
+        return node.isRed;
+    }
+    
+    function size(node) {
+        if (!node) return 0;
+        return node.size;
+    }
+    
+    function flipColors(node) {
+        // h must have opposite color of its two children
+        node.isRed = !node.isRed;
+        node.left.isRed = !node.left.isRed;
+        node.right.isRed = !node.right.isRed;
+    }
+    
+    // make a left-leaning link lean to the right
+    function rotateRight(node) {
+        const x = node.left;
+        node.left = x.right;
+        x.right = node;
+        x.isRed = x.right.isRed;
+        x.right.isRed = true;
+        x.size = node.size;
+        node.size = size(node.left) + size(node.right) + node.count;
+        return x;
+    }
+
+    // make a right-leaning link lean to the left
+    function rotateLeft(node) {
+        const x = node.right;
+        node.right = x.left;
+        x.left = node;
+        x.isRed = x.left.isRed;
+        x.left.isRed = true;
+        x.size = node.size;
+        node.size = size(node.left) + size(node.right) + node.count;
+        return x;
+    }
+
+
+
+    function Node(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+        this.count = 1;
+        this.size = 1;
+        this.isRed = true;
+    }
+};
+
 // segment tree
 class SegmentTreeNode {
     constructor(start, end) {
