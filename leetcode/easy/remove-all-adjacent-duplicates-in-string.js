@@ -1,4 +1,5 @@
 /**
+ * https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
  * @param {string} s
  * @return {string}
  */
