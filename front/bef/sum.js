@@ -1,4 +1,5 @@
 /**
+ * https://bigfrontend.dev/problem/create-a-sum
  * @param {number} num
  */
  function sum(num) {

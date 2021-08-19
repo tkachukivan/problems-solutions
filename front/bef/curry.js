@@ -1,4 +1,5 @@
 /**
+ * https://bigfrontend.dev/problem/implement-curry
  * @param { (...args: any[]) => any } fn
  * @returns { (...args: any[]) => any }
  */
