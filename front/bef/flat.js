@@ -8,7 +8,7 @@
     if (depth === 0) return arr;
     return arr.reduce((acc, val) => {
       if (Array.isArray(val)) {
-        flat(val, depth - 1).forEach(val => acc.push(val));
+        acc.push(...flat(val, depth - 1));
       } else {
         acc.push(val);
       }
