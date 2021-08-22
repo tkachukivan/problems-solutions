@@ -10,9 +10,9 @@ class MyPromise {
         // your code here
         this.status = statuses.PENDING;
         try {
-        executor(this._resolve.bind(this), this._reject.bind(this));
-        } catch(error) {
-        this._reject(error);
+            executor(this._resolve.bind(this), this._reject.bind(this));
+        } catch (error) {
+            this._reject(error);
         }
     }
 
@@ -25,8 +25,8 @@ class MyPromise {
         this.onRejected = isOnRejectedFunction ? onRejected : (error) => { throw error };
 
         return new MyPromise((resolve, reject) => {
-        this.thenPromiseResolve = resolve;
-        this.thenPromiseReject = reject;
+            this.thenPromiseResolve = resolve;
+            this.thenPromiseReject = reject;
         })
     }
 
@@ -41,20 +41,20 @@ class MyPromise {
         this.result = value;
 
         queueMicrotask(() => {
-        if (this.onFulfilled === undefined) return;
+            if (this.onFulfilled === undefined) return;
 
-        try {
-            const returnValue = this.onFulfilled(this.result);
-            const isReturnValuePromise = returnValue instanceof MyPromise;
+            try {
+                const returnValue = this.onFulfilled(this.result);
+                const isReturnValuePromise = returnValue instanceof MyPromise;
 
-            if (!isReturnValuePromise) {
-            this.thenPromiseResolve(returnValue);
-            } else {
-            returnValue.then(this.thenPromiseResolve, this.thenPromiseReject);
+                if (!isReturnValuePromise) {
+                    this.thenPromiseResolve(returnValue);
+                } else {
+                    returnValue.then(this.thenPromiseResolve, this.thenPromiseReject);
+                }
+            } catch (error) {
+                this.thenPromiseReject(error);
             }
-        } catch (error) {
-            this.thenPromiseReject(error);
-        }
         });
     }
 
@@ -64,23 +64,23 @@ class MyPromise {
         this.result = error;
 
         queueMicrotask(() => {
-        if (this.onRejected === undefined) return;
+            if (this.onRejected === undefined) return;
 
-        try {
-            const returnValue = this.onRejected(this.result);
-            const isReturnValuePromise = returnValue instanceof MyPromise;
+            try {
+                const returnValue = this.onRejected(this.result);
+                const isReturnValuePromise = returnValue instanceof MyPromise;
 
-            if (!isReturnValuePromise) {
-            this.thenPromiseResolve(returnValue);
-            } else {
-            returnValue.then(
-                this.thenPromiseResolve,
-                this.thenPromiseReject,
-            );
+                if (!isReturnValuePromise) {
+                    this.thenPromiseResolve(returnValue);
+                } else {
+                    returnValue.then(
+                        this.thenPromiseResolve,
+                        this.thenPromiseReject,
+                    );
+                }
+            } catch (error) {
+                this.thenPromiseReject(error);
             }
-        } catch (error) {
-            this.thenPromiseReject(error);
-        }
         });
     }
 
@@ -89,18 +89,18 @@ class MyPromise {
         const isValuePromise = value instanceof MyPromise;
 
         if (isValuePromise) {
-        return value;
+            return value;
         }
 
         return new MyPromise((resolve) => {
-        resolve(value);
+            resolve(value);
         });
     }
 
     static reject(value) {
         // your code here
         return new MyPromise((_, reject) => {
-        reject(value);
+            reject(value);
         });
     }
 }
@@ -136,7 +136,7 @@ class MyPromise {
     }
 
     static reject(value) {
-        return new MyPromise((resolve,reject) => reject(value));
+        return new MyPromise((resolve, reject) => reject(value));
     }
 
     _resolve(value) {
@@ -149,10 +149,10 @@ class MyPromise {
             try {
                 const result = this.onFulfilled(value);
                 if (result instanceof MyPromise) {
-                result.then(this.onFulfilledResolve?.bind(this))
-                result.catch(this.onFulfilledReject?.bind(this))
+                    result.then(this.onFulfilledResolve?.bind(this))
+                    result.catch(this.onFulfilledReject?.bind(this))
                 } else {
-                setTimeout(this.onFulfilledResolve?.bind(this, result))
+                    setTimeout(this.onFulfilledResolve?.bind(this, result))
                 }
             } catch (error) {
                 setTimeout(this.onFulfilledReject?.bind(this, error));
@@ -170,10 +170,10 @@ class MyPromise {
             try {
                 const result = this.onRejected(error);
                 if (result instanceof MyPromise) {
-                result.then(this.onFulfilledResolve?.bind(this))
-                result.catch(this.onFulfilledReject?.bind(this))
+                    result.then(this.onFulfilledResolve?.bind(this))
+                    result.catch(this.onFulfilledReject?.bind(this))
                 } else {
-                setTimeout(this.onRejectedResolve?.bind(this, result));
+                    setTimeout(this.onRejectedResolve?.bind(this, result));
                 }
             } catch (error) {
                 setTimeout(this.onRejectedReject?.bind(this, error));

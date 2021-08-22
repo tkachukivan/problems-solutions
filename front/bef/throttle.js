@@ -10,20 +10,20 @@ function throttle(func, wait) {
     let latestArgs = null;
     let calledWhileWaiting = false;
     function inner(...args) {
-      if (waiting) {
-        latestArgs = args;
-        calledWhileWaiting = true;
-        return;
-      }
-      func.apply(this, args);
-      waiting = true;
-      calledWhileWaiting = false;
-  
-      setTimeout(() => {
-        waiting = false;
-        if (calledWhileWaiting) inner(latestArgs);
-      }, wait);
+        if (waiting) {
+            latestArgs = args;
+            calledWhileWaiting = true;
+            return;
+        }
+        func.apply(this, args);
+        waiting = true;
+        calledWhileWaiting = false;
+
+        setTimeout(() => {
+            waiting = false;
+            if (calledWhileWaiting) inner(latestArgs);
+        }, wait);
     }
-  
+
     return inner;
-  }
+}

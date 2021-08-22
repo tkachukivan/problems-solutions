@@ -2,15 +2,15 @@
  * https://bigfrontend.dev/problem/create-a-counter-object
  * @returns { {count: number}}
  */
- function createCounter() {
+function createCounter() {
     let count = 0;
     return {
-      get count() {
-        return count++;
-      },
-      set count(val) {}
+        get count() {
+            return count++;
+        },
+        set count(val) { }
     }
-  }
+}
 
 const counter = createCounter()
 counter.count // 0, then it should increment

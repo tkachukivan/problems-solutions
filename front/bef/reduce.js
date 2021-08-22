@@ -6,15 +6,15 @@ Array.prototype.myReduce = function (callback, acc) {
     if (length === 0 && arguments.length === 1) throw new Error('Reduce of empty array with no initial value')
     let i = 0;
     if (arguments.length === 1) {
-      acc = this[i];
-      i++;
+        acc = this[i];
+        i++;
     }
-  
-    for (;i < length; i++) {
-      acc = callback(acc, this[i], i, this)
+
+    for (; i < length; i++) {
+        acc = callback(acc, this[i], i, this)
     }
-  
+
     return acc;
-  }
-  
-  console.log([1,2,3].myReduce((acc, num) => acc + num));
+}
+
+console.log([1, 2, 3].myReduce((acc, num) => acc + num));

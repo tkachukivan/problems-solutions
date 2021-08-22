@@ -3,14 +3,14 @@
  * @param { (...args: any[]) => any } fn
  * @returns { (...args: any[]) => any }
  */
- function curry(fn) {
+function curry(fn) {
     function inner(...args) {
-      if (args.length >= fn.length) {
-        return fn.apply(this, args);
-      } else {
-        return (...newArgs) => inner.apply(this, args.concat(newArgs));
-      }
+        if (args.length >= fn.length) {
+            return fn.apply(this, args);
+        } else {
+            return (...newArgs) => inner.apply(this, args.concat(newArgs));
+        }
     }
-  
+
     return inner;
-  }
+}
