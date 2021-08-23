@@ -17,7 +17,6 @@
  * @return {string}
  */
 function serialize(root) {
-    if (!root) return '';
     // your code here
     const result = [];
     traverse(root);
@@ -40,7 +39,6 @@ function serialize(root) {
  * @return {Node}
  */
 function deserialize(str) {
-    if (!str) return null;
     // your code here
     const arrayTree = str.split();
     let currentIndex = 0;
@@ -49,7 +47,7 @@ function deserialize(str) {
 
     function buildTree() {
         if (!arrayTree[currentIndex]) {
-            currentIndex++;
+            currentElement++;
             return null;
         }
         const node = new Node(arrayTree[currentIndex++]);
